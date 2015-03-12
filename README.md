@@ -52,6 +52,7 @@ To install Publify you need the following:
 1.  Unzip Publify archive
 2.  Rename database.yml.yourEngine as database.yml
 3.  Edit database.yml to add your database name, login and password.
+4.  Navigate to the publify directory and run the following commands to start up a default Publify instance.
 
 ```bash
 $ bundle install
@@ -62,7 +63,7 @@ $ rake assets:precompile
 $ rails server
 ```
 
-You can now launch you browser and access to 127.0.0.1:3000.
+You can now launch your browser and access your Publify instance at 127.0.0.1:3000.
 
 
 
