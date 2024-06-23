@@ -1,0 +1,45 @@
+<!--
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rdf:Description
+  rdf:about=""
+  trackback:ping="<%= server_url_for :controller=>"events", :action=>"trackback", :id=>@event %>"
+  dc:title="<%=h @event.title.gsub(/-+/, '-') %>"
+  dc:identifier="<%= server_url_for :controller=>"events", :action=>"read", :id=>@event %>"
+  dc:description="<%=h strip_html(article_html(@event)[0..255]).gsub(/-+/, '-') %>"
+  dc:creator="<%= h @event.author %>"
+  dc:date="<%= @event.updated_at.xmlschema %>" />
+</rdf:RDF>
+-->
+
+<% if @event.class == Hearing %>
+<%= render :partial => 'hearing',:locals=>{:event=>@event} %>
+<% else %>
+<%= render :partial => 'event' %>
+<% end %>
+
+<% if @event.allow_pings? -%>
+  <h5><a name="trackbacks">Trackbacks</a></h5>
+  <p>
+    <a href="<%= @event.trackback_url %>">This event's trackback address</a>
+  </p>    
+
+  <% unless @event.trackbacks.blank? -%>
+  <ol id="trackbacks" class="trackbacks">
+    <%= render(:partial => "trackback", :collection => @event.trackbacks) %>
+  </ol>  
+  <% end -%>  
+<% end -%>
+
+<% if @event.allow_comments? or @event.comments.size > 0 -%>
+  <h5><a name="comments">Comments</a></h5> 
+  <p><a href="#commentform">Leave a response</a></p>
+  
+  <div id="comments_div">
+    <%= render :partial => "comment" %>
+  </div>
+<% end -%>
+
+<%= render :partial => 'comment_form' if @event.allow_comments? %>

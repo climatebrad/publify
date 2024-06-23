@@ -1,0 +1,6 @@
+<div class="atomentry" id="organization-<%= organization.id %>">
+<% if organization.url %>
+  <%= link_to organization.fullname, organization.url %><% else %>
+  <%= organization.fullname %><% end %>
+  <% unless controller.action_name == 'index' -%>
+  <%= organization.description %><% end %></div>

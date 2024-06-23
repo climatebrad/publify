@@ -1,0 +1,5 @@
+<%= render :partial => 'event', :collection => @events %>
+
+<% unless @pages.item_count <= this_blog.limit_article_display -%>
+<p class="pagination">Older events: <%= pagination_links @pages, :params => { :action => @controller.action_name } %></p>
+<% end -%>

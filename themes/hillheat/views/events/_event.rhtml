@@ -1,0 +1,45 @@
+<div class="atomentry" id="event-<%= event.id %>">
+  <h2 class="title">
+    <%= (controller.action_name.include? 'permalink') ? event.title : article_link(event.title, event) %> 
+    <%= content_tag(:span, event.comments.size, :class => 'comment_count') if event.comments.size > 0 %>
+  </h2>
+
+  <p class="author">
+    <!--Posted by <cite><%= author_link(event) %></cite>-->
+    <abbr class="published" title="<%= event.published_at.xmlschema %>"><%= js_distance_of_time_in_words_to_now event.published_at %></abbr>
+  </p>
+
+  <div class="content">
+    <%= article_html(event, :body) %>
+
+    <% if event.extended? -%>
+      <div class="extended">
+        <% if controller.action_name == 'index' -%>
+          <p><%= article_link "Continue reading...", event %></p>
+        <% else -%>
+          <%= article_html(event, :extended) %>
+        <% end -%>
+      </div>
+    <% end -%>  
+  </div>
+
+  <ul class="meta">
+    <%= content_tag(:li, category_links(event), :class => 'categories') unless event.categories.empty? %>
+    <%= content_tag(:li, tag_links(event), :class => 'tags') unless event.tags.empty? %>
+    <li><% if event.class==Hearing %>
+    <% for committee in event.committees.sort %> <%= committee.fullname+' Committee' %><% end %>
+    <% if !event.subcommittees.empty? %><br />
+    <% for subcommittee in event.subcommittees.sort %> <%= subcommittee.name+' Subcommittee' %><% end %><% end %>
+    <% if event.room %><%= event.room.fullname %><% end %><br />
+    <% else %>
+    <% for organization in event.organizations.sort %> <%= organization.fullname %><% end %>
+    <% if event.location %><%= event.location.fullname %><% end %><br /><% end %>
+    
+      <%= trackbacks_link(event) << ',' if event.allow_pings? %>
+      <%= comments_link(event) << ',' if event.allow_comments? %>
+      <a href="<%= article_url event %>" rel="bookmark">permalink</a>,
+      <a href="<%= url_for :controller => 'xml', :action=>'feed', :type=>'article', :format => 'rss',  :id => event %>">rss</a>,    
+      <a href="<%= url_for :controller => 'xml',  :action=>'feed', :type=>'event', :format => 'atom', :id => event %>">atom</a>   
+    </li>
+  </ul>
+</div>
