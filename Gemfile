@@ -17,6 +17,7 @@ gem "puma", "~> 6.2"
 
 gem "publify_amazon_sidebar", "~> 10.0.0"
 gem "publify_core", "~> 10.0.0"
+gem "hillheat_core", "~> 10.0.0", :git => "git://github.com/climatebrad/hillheat_core"
 gem "publify_textfilter_code", "~> 10.0.0"
 
 # Use Uglifier as compressor for JavaScript assets
