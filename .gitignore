@@ -37,3 +37,4 @@ Gemfile.lock
 gems/
 node_modules/
 spec/examples.txt
+*~
