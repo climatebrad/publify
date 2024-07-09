@@ -1,6 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<html lang="en">
+<head profile="http://gmpg.org/xfn/11">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y72ZZ3F7M2"></script>
   <script>
@@ -10,19 +11,15 @@
 
     gtag('config', 'G-Y72ZZ3F7M2');
   </script>
-  <title><%=h page_title %></title>
-  <meta property="og:url" content="<%=h page_url %>" />
-<meta property="og:description" content="<%=h page_description %>" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="<%=h page_title %>" />
-  <%= page_header %>
-  <%= stylesheet_link_tag '/stylesheets/theme/application.css', :media => 'all' %>
+  <title><%= h(page_title) %></title>
+  <%= stylesheet_link_tag '/stylesheets/theme/application.css',  media: 'all' %>
+  <%= render 'shared/page_header' %>
 </head>
 
 <body>
 <div id="container">
   <div id="header">
-    <h1><span><%= link_to this_blog.blog_name, { :controller => '/' } %></span></h1>
+    <h1><span><%= link_to(this_blog.blog_name, this_blog.base_url) %></span></h1>
     <h2><%= this_blog.blog_subtitle %></h2>
   </div>
 
