@@ -34,3 +34,5 @@ gems/
 node_modules/
 spec/examples.txt
 *~
+engines/
+/public/assets/*[a-z0-9]{32}\.
