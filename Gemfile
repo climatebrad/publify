@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", ["~> 6.1.6", ">= 6.1.6.1"]
+gem "rails", [">= 6.1.6.1"] # allowing rails 7
 
 gem "mysql2"
 gem "pg"
@@ -92,3 +92,5 @@ end
 Dir.glob(File.join(File.dirname(__FILE__), "themes", "**", "Gemfile")) do |gemfile|
   eval(File.read(gemfile), binding)
 end
+
+gem 'hillheat_plugin', path: 'engines/hillheat_plugin'
